@@ -1,0 +1,266 @@
+Open Home Doctor
+
+Launch Request
+	{
+  "session": {
+    "new": true,
+    "sessionId": "SessionId.55fe0024-04e7-4b31-8037-89dc1b19d119",
+    "application": {
+      "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+    }
+  },
+  "request": {
+    "type": "LaunchRequest",
+    "requestId": "EdwRequestId.e5baf085-8b23-4356-9f51-b41538a3f333",
+    "locale": "en-US",
+    "timestamp": "2018-03-26T21:25:08Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}
+
+Launch RESPONSE
+
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "ssml": "<speak> Hi Welcome to Home Doctor, Hope you doing good.. tell me you name to help you.. </speak>",
+      "type": "SSML"
+    },
+    "reprompt": {
+      "outputSpeech": {
+        "ssml": "<speak> Please tell me your name.. </speak>",
+        "type": "SSML"
+      }
+    },
+    "speechletResponse": {
+      "outputSpeech": {
+        "ssml": "<speak> Hi Welcome to Home Doctor, Hope you doing good.. tell me you name to help you.. </speak>"
+      },
+      "reprompt": {
+        "outputSpeech": {
+          "ssml": "<speak> Please tell me your name.. </speak>"
+        }
+      },
+      "shouldEndSession": false
+    }
+  },
+  "sessionAttributes": {}
+}
+
+2. INTENT REQUEST
+
+{
+  "session": {
+    "new": false,
+    "sessionId": "SessionId.55fe0024-04e7-4b31-8037-89dc1b19d119",
+    "application": {
+      "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.300471b5-3685-4dee-b338-59f5cbc08f29",
+    "intent": {
+      "name": "MyNameIsIntent",
+      "slots": {
+        "name": {
+          "name": "name",
+          "value": "Alex"
+        }
+      }
+    },
+    "locale": "en-US",
+    "timestamp": "2018-03-26T21:28:17Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}
+
+2. INTENT RESPONSE
+
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "ssml": "<speak> Hello Alex, Please tell me if you have any problems, I can try my best to give you a solution. </speak>",
+      "type": "SSML"
+    },
+    "speechletResponse": {
+      "outputSpeech": {
+        "ssml": "<speak> Hello Alex, Please tell me if you have any problems, I can try my best to give you a solution. </speak>"
+      },
+      "shouldEndSession": false
+    }
+  },
+  "sessionAttributes": {}
+}
+
+
+3. HEADACHE INTENT REQUEST
+
+{
+  "session": {
+    "new": false,
+    "sessionId": "SessionId.55fe0024-04e7-4b31-8037-89dc1b19d119",
+    "application": {
+      "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.4c88a68c-dda9-4071-a27c-87055c36c980",
+    "intent": {
+      "name": "HeadAcheIntent",
+      "slots": {}
+    },
+    "locale": "en-US",
+    "timestamp": "2018-03-26T21:29:46Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}
+
+3.HEADACHE INTENT RESPONSE
+
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "ssml": "<speak> if you have head ache, Please tell me which side of your head have pain </speak>",
+      "type": "SSML"
+    },
+    "speechletResponse": {
+      "outputSpeech": {
+        "ssml": "<speak> if you have head ache, Please tell me which side of your head have pain </speak>"
+      },
+      "shouldEndSession": false
+    }
+  },
+  "sessionAttributes": {}
+}
+
+4. HEADACHE QUES1 INTENT REQUEST
+
+{
+  "session": {
+    "new": false,
+    "sessionId": "SessionId.55fe0024-04e7-4b31-8037-89dc1b19d119",
+    "application": {
+      "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.1062c600-7b69-4e52-a784-1860b28f82a9",
+    "intent": {
+      "name": "HeadAcheQuesOneIntent",
+      "slots": {
+        "side": {
+          "name": "side",
+          "value": "right"
+        }
+      }
+    },
+    "locale": "en-US",
+    "timestamp": "2018-03-26T21:31:10Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.430d1dbf-278b-4584-8335-a0f5b20bb729"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AGP6USSRMQMH454BNNSIMIWTUXNNOZWQXJMNPDPSKGEGKK3CGSGWUTWZYBNU24NJNNADTUCXU66CNJER7U57OENU5Q2ZQ3SITUWNXZBCW7DDJUY3GCB4PEP3ILZABI4APR26RXTNUJUMH6HKODBBLQ3KMSF4IRZE5MYWCA7KXVGW7G7VD6EBBG76E23HUQ7YFKDBGLTMV4W7V5Q"
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}
+
+4. RESPONSE
+
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "ssml": "<speak> Alexif you have pain in right, gently massage with thumb finger on your right side of head for 15 min. This will reduce your pain quickly. Thank you.. </speak>",
+      "type": "SSML"
+    },
+    "speechletResponse": {
+      "outputSpeech": {
+        "ssml": "<speak> Alex if you have pain in right, gently massage with thumb finger on your right side of head for 15 min. This will reduce your pain quickly. Thank you.. </speak>"
+      },
+      "shouldEndSession": true
+    }
+  },
+  "sessionAttributes": {}
+}
