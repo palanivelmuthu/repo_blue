@@ -1,47 +1,374 @@
 {
-    "interactionModel":{
-        "languageModel":{
-            "invocationName":"hello world",
-            "types":[],
-            "intents":[
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "blue",
+            "intents": [
                 {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
                 },
                 {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
                 },
                 {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
                 },
                 {
-                    "name":"HelloWorldIntent",
-                    "slots":[
-
+                    "name": "HeadAcheIntent",
+                    "slots": [
+                        {
+                            "name": "headacheduration",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "last {headacheduration} days",
+                                "I am having it for the past {headacheduration} days",
+                                "{headacheduration} days",
+                                "for the past {headacheduration} days"
+                            ]
+                        },
+                        {
+                            "name": "frequency",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "I am getting {frequency}",
+                                "{frequency} in a month",
+                                "{frequency} in a week",
+                                "monthly {frequency}",
+                                "weekly {frequency}"
+                            ]
+                        },
+                        {
+                            "name": "visionblidspotoccurance",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "{visionblidspotoccurance} I dint get any",
+                                "{visionblidspotoccurance} I did not get any such things",
+                                "{visionblidspotoccurance} I am getting blind spots",
+                                "{visionblidspotoccurance} I am getting blurr sometimes",
+                                "{visionblidspotoccurance}"
+                            ]
+                        },
+                        {
+                            "name": "headlocation",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "it is in {headlocation} side",
+                                "i have pain in {headlocation} side",
+                                "{headlocation} side"
+                            ]
+                        }
                     ],
-                    "samples":[
-                        "hello",
-                        "say hello",
-                        "say hello world"
+                    "samples": [
+                        "I have head pain",
+                        "I have head ache",
+                        "I have a head ache",
+                        "head ache",
+                        "pain in my head"
                     ]
                 },
                 {
-                    "name":"MyNameIsIntent",
-                    "slots":[
+                    "name": "MyNameIsIntent",
+                    "slots": [
                         {
-                            "name":"name",
-                            "type":"AMAZON.US_FIRST_NAME"
+                            "name": "name",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "I am {name}",
+                                "{name}",
+                                "my name is {name}"
+                            ]
                         }
                     ],
-                    "samples":[
+                    "samples": [
                         "my name is {name}",
                         "i am {name}",
-                        "you can call me {name}"
+                        "you can call me {name}",
+                        "{name}"
+                    ]
+                },
+                {
+                    "name": "FeverIntent",
+                    "slots": [
+                        {
+                            "name": "days",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{days}",
+                                "{days} days",
+                                "for the last {days} days",
+                                "last {days} days",
+                                "fever is there for the past {days} days",
+                                "I have fever for {days} days"
+                            ]
+                        },
+                        {
+                            "name": "bodypain",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "{bodypain}",
+                                "{bodypain} yes I have",
+                                "{bodypain} I dont have "
+                            ]
+                        },
+                        {
+                            "name": "travel",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "{travel} I dint",
+                                "{travel} I havent ",
+                                "{travel} I did not travel",
+                                "{travel} I travelled"
+                            ]
+                        },
+                        {
+                            "name": "surgery",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "samples": [
+                                "{surgery} I had surgery",
+                                "{surgery} Surgery in recent days",
+                                "{surgery}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "fever",
+                        "I have severe fever",
+                        "I have fever"
+                    ]
+                },
+                {
+                    "name": "AuthenticationIntent",
+                    "slots": [
+                        {
+                            "name": "authcode",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "{authcode}"
+                    ]
+                }
+            ],
+            "types": []
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "MyNameIsIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "name",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1126397490788.856308244498"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "FeverIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "days",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": true,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "confirmation": "Confirm.Slot.1241425939382.391048696555",
+                                "elicitation": "Elicit.Slot.1241425939382.391048696555"
+                            }
+                        },
+                        {
+                            "name": "bodypain",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1241425939382.263971485356"
+                            }
+                        },
+                        {
+                            "name": "travel",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1241425939382.188748841913"
+                            }
+                        },
+                        {
+                            "name": "surgery",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1170694709353.47133519298"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "HeadAcheIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "headacheduration",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.222966194889.510876727779"
+                            }
+                        },
+                        {
+                            "name": "frequency",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.222966194889.1079978084664"
+                            }
+                        },
+                        {
+                            "name": "visionblidspotoccurance",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.222966194889.318488682816"
+                            }
+                        },
+                        {
+                            "name": "headlocation",
+                            "type": "AMAZON.US_FIRST_NAME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.222966194889.323971113406"
+                            }
+                        }
                     ]
                 }
             ]
-        }
+        },
+        "prompts": [
+            {
+                "id": "Confirm.Intent-MyNameIsIntent",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Thanks for confrimation {name}  Please say Ok to continue. "
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1126397490788.856308244498",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Sorry for that. Please tell your name clearly to record the slot."
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.1126397490788.856308244498",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Trying to confirm your name. Is my understanding of your name  {name} correct?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1241425939382.391048696555",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "How long do you have fever?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Slot.1241425939382.391048696555",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Thanks. you have fever for {days} days correct?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1241425939382.188748841913",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Did you recently travel outside the country?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1241425939382.263971485356",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Do you have body pain?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1170694709353.47133519298",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "You have done any recent Surgery?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.222966194889.1079978084664",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "How frequently you are getting the  headache?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.222966194889.323971113406",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which side of your head you are getting pain?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.222966194889.510876727779",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Ok. If you have head ache, Please tell me how many days you have head ache?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.222966194889.318488682816",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Do you get any vision change or blind spots during head ache?"
+                    }
+                ]
+            }
+        ]
     }
 }

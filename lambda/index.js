@@ -14,8 +14,7 @@ const Alexa = require('alexa-sdk');
 exports.handler = function (event, context,callback) {
     var alexa = Alexa.handler(event, context);
     //.APP_ID = APP_ID;
-    alexa.registerHandlers(handlers,mainHandler);
-    //alexa.registerHandlers(authHandlers);
+    alexa.registerHandlers(handlers);
     alexa.execute();
 };
 
@@ -24,19 +23,10 @@ const handlers = {
     'LaunchRequest': function () {
         this.emit('fnSayWelcome');
     },
-    'fnSayWelcome': function () {
-        this.handler.state="_MAIN";
-        this.emit(':ask','Hi Welcome to Blue. Please tell your name to to continue..', 'Please tell your authentication code.');
-    },
-};
-
-
-var mainHandler=Alexa.CreateStateHandler("_MAIN",{
-   
+  
     'MyNameIsIntent': function () {
-        //var filledSlots = delegateSlotCollection.call(this);
-         //this.handler.state="_MAIN";
-        this.emitWithState('fnMyNameIsIntent');
+        var filledSlots = delegateSlotCollection.call(this);
+        this.emit('fnMyNameIsIntent');
     },
   
     'HeadAcheIntent': function () {
@@ -49,7 +39,11 @@ var mainHandler=Alexa.CreateStateHandler("_MAIN",{
         this.emit('fnFeverIntent');
     },
 
-     'fnMyNameIsIntent': function () {
+    'fnSayWelcome': function () {
+         this.emit(':ask','Hi Welcome to Blue. Please tell your name to to continue..', 'Please tell your authentication code.');
+    
+    },
+    'fnMyNameIsIntent': function () {
         var name = this.event.request.intent.slots.name.value;
         username=name;
         this.attributes["name"] = name;
@@ -96,7 +90,7 @@ var mainHandler=Alexa.CreateStateHandler("_MAIN",{
         this.response.speak(STOP_MESSAGE);
         this.emit(':responseReady');
     }
-});
+};
 
 function delegateSlotCollection(){
   console.log("in delegateSlotCollection");
@@ -107,11 +101,11 @@ function delegateSlotCollection(){
       //optionally pre-fill slots: update the intent object with slot values for which
       //you have defaults, then return Dialog.Delegate with this updated intent
       // in the updatedIntent property
-      this.emitWithState(":delegate", updatedIntent);
+      this.emit(":delegate", updatedIntent);
     } else if (this.event.request.dialogState !== "COMPLETED") {
       console.log("in not completed");
       // return a Dialog.Delegate directive with no updatedIntent property.
-      this.emitWithState(":delegate");
+      this.emit(":delegate");
     } else {
       console.log("in completed");
       console.log("returning: "+ JSON.stringify(this.event.request.intent));
