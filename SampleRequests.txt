@@ -1,6 +1,6 @@
 Open Home Doctor
  ---------------   
-Launch Request
+Launch Requests
 	{
   "session": {
     "new": true,
