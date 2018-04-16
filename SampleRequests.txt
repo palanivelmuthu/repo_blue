@@ -1,4 +1,4 @@
-Open Home Doctor --
+Open Home Doctor
  ---------------   
 Launch Request
 	{
