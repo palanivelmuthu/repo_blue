@@ -1,15 +1,15 @@
 
 'use strict';
+const Alexa = require('alexa-sdk');
+const dao = require('./dao.js');
+const restapi = require('./restapi.js');
 
 const APP_ID = undefined;
-
 const HELP_MESSAGE = 'You can say a problem, or, you can say stop... What can I help you with?';
 const HELP_REPROMPT = 'What can I help you with?';
 const STOP_MESSAGE = 'Have a nice day. Goodbye!';
 const YES_MESSAGE = 'Please tell me if you have any problems';
 const NO_MESSAGE = 'Thank you..Have a nice day. Goodbye!';
-
-const Alexa = require('alexa-sdk');
 
 exports.handler = function (event, context,callback) {
     var alexa = Alexa.handler(event, context);
@@ -19,8 +19,10 @@ exports.handler = function (event, context,callback) {
 };
 
 var username = '';
+
 const handlers = {
-    'LaunchRequest': function () {
+
+     'LaunchRequest': function () {
         this.emit('fnSayWelcome');
     },
   
@@ -40,8 +42,25 @@ const handlers = {
     },
 
     'fnSayWelcome': function () {
-         this.emit(':ask','Hi Welcome to Blue. Please tell your name to to continue..', 'Please tell your authentication code.');
-    
+        let hndlr = this;
+        let dependentList = "";
+        let apitoken = this.event.session.user.accessToken;
+
+        restapi.getLoggedInUser(apitoken,response=>{
+            let email = response.email;
+            let user = response.name;
+ 
+            dao.getDependents(email,function(dependents){
+                for(var i=0;i < dependents.length;i++){
+                    dependentList += dependents[i].firstname +". or ";
+                }
+                this.event.session.dependents = dependentList;
+                hndlr.emit(':ask','Hi Welcome to Blue. '+user +'.Please tell who has problem in your family, Youself, '+dependentList+' somebody .', 'Please tell any name to continue');
+            });
+        });
+
+        console.log("Email from alexa after rest call ", email);
+        console.log("User from alexa after rest call ", user);
     },
     'fnMyNameIsIntent': function () {
         var name = this.event.request.intent.slots.name.value;
