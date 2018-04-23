@@ -16,9 +16,34 @@ let getDependents = function (emailid,callback) {
         if (err) {
             console.log("Members::get::error - " + JSON.stringify(err, null, 2));
         } else {
-             callback(response.Item.dependents);
+             callback(response.Item.dependents,response.Item.personalinfo);
         }
     });
 }
 
+let saveDiagnosis = function(diagnosisItem,callback){
+
+    console.log("Inside DAO : ",diagnosisItem );
+    
+    diagnosisItem.lastupdate= new Date().toString()
+    var params = {
+        Item:diagnosisItem,
+        TableName:'Diagnosis'
+    };
+    docClient.put(params, function (err, data) {
+
+        console.log("Inside PUT Err  : ", err );
+        console.log("Inside PUT data : ", data );
+
+        if (err) {
+            console.log("Diagnosis::Save::Error - " + JSON.stringify(err, null, 2));
+        } else {
+            console.log("Saved Successfully");
+             callback("Diagnosis Details Saved in Database");
+        }
+    });
+
+}
+
 module.exports.getDependents = getDependents;
+module.exports.saveDiagnosis = saveDiagnosis;

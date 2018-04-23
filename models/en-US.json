@@ -149,6 +149,20 @@
                     "samples": [
                         "{authcode}"
                     ]
+                },
+                {
+                    "name": "AuthIntent",
+                    "slots": [
+                        {
+                            "name": "authcode",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "{authcode} is my password",
+                        "my password is {authcode}",
+                        "{authcode}"
+                    ]
                 }
             ],
             "types": []
