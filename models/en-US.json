@@ -139,23 +139,11 @@
                     ]
                 },
                 {
-                    "name": "AuthenticationIntent",
-                    "slots": [
-                        {
-                            "name": "authcode",
-                            "type": "AMAZON.NUMBER"
-                        }
-                    ],
-                    "samples": [
-                        "{authcode}"
-                    ]
-                },
-                {
                     "name": "AuthIntent",
                     "slots": [
                         {
                             "name": "authcode",
-                            "type": "AMAZON.NUMBER"
+                            "type": "AMAZON.FOUR_DIGIT_NUMBER"
                         }
                     ],
                     "samples": [
