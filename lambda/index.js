@@ -29,7 +29,7 @@ const handlers = {
         this.emit('fnIntro');
     },
     'fnIntro': function() {
-		this.emit(':ask', "Welcome, Please say the password to open Blue app.");
+		this.emit(':ask', "Welcome, Please say your four digit passcode to continue.","Please say your passcode clearly.");
 	},
     'AuthIntent': function () {
 		this.emit('fnAuthIntent');
@@ -39,7 +39,7 @@ const handlers = {
 		if(authcode=='1234'){
 			this.emit('fnSayWelcome');
 		}else{
-			this.emit(':ask', "Sorry, pleaes say the password clearly.");
+			this.emit(':ask', "Sorry, Your passcode does not match. Please try again.");
 		}
 	},
     'MyNameIsIntent': function () {
@@ -82,7 +82,7 @@ const handlers = {
                 hndlr.attributes["dependentList"] = dependents;
                 hndlr.attributes["diagnosisItem"]={};
 
-                hndlr.emit(':ask','Hi Welcome to Blue. '+user +'.Please tell who has problem in your family, Youself, '+dependentList+' somebody .', 'Please tell any name to continue');
+                hndlr.emit(':ask','Hi Welcome to PDoc. Dear '+user +' , Please tell who has problem in your family. Is it you? or '+dependentList+' someone else .', 'Please tell any name to continue');
             });
         });
     },
@@ -108,7 +108,7 @@ const handlers = {
                 }
             }
         }
-        this.emit(':ask','Hello '+name+', Please tell me if you have any problems, I can try my best to give you a solution.')
+        this.emit(':ask','Hello '+name+', Please tell me your problem, I can try my best to help you. Say something like, I have fever, I have head ache.')
     },
 
     'fnFeverIntent':function(){
@@ -138,7 +138,7 @@ const handlers = {
         speach = speach + ' and Question for your travel outside country is '+travel;
         speach = speach + ' and Question for your surgery is ' + surgery;
         speach = speach + '. '+ response;
-        speach = speach +'. So '+ username+', for all your stated conditions, please take Tylanol or Ibuprofen for 5 days. That will reduce your fever. Dont worry. Take rest. Thank you.  If you have any other problems to check, then Please tell your problem, otherwise say stop';
+        speach = speach +'. So '+ username+', for all your stated conditions, please take Tylanol or Ibuprofen for 5 days. That will reduce your fever. Dont worry. Take rest. Thank you.  If you have any other problem please tell now, otherwise say stop';
         
         hndlr.emit(':ask',speach);
        })

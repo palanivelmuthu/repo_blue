@@ -147,8 +147,13 @@
                         }
                     ],
                     "samples": [
+                        "{authcode} is my passcode",
+                        "my passcode is {authcode}",
                         "{authcode} is my password",
                         "my password is {authcode}",
+                        "its {authcode}",
+                        "password is {authcode}",
+                        "passcode is {authcode}",
                         "{authcode}"
                     ]
                 }
