@@ -29,7 +29,7 @@ const handlers = {
         this.emit('fnIntro');
     },
     'fnIntro': function() {
-		this.emit(':ask', "Welcome, Please say your four digit passcode to continue.","Please say your passcode clearly.");
+		this.emit(':ask', "Welcome to P-Doc, Please say your four digit passcode to continue.","Please say your passcode clearly.");
 	},
     'AuthIntent': function () {
 		this.emit('fnAuthIntent');
@@ -43,10 +43,11 @@ const handlers = {
 		}
 	},
     'MyNameIsIntent': function () {
-        var delegateStatus = delegateSlotCollection.call(this);
-        if(delegateStatus==="COMPLETED"){
-            this.emit('fnMyNameIsIntent');
-        }           
+        //var delegateStatus = delegateSlotCollection.call(this);
+        // if(delegateStatus==="COMPLETED"){
+        //     this.emit('fnMyNameIsIntent');
+        // }       
+        this.emit('fnMyNameIsIntent');    
     },
   
     'HeadAcheIntent': function () {
@@ -82,14 +83,14 @@ const handlers = {
                 hndlr.attributes["dependentList"] = dependents;
                 hndlr.attributes["diagnosisItem"]={};
 
-                hndlr.emit(':ask','Hi Welcome to PDoc. Dear '+user +' , Please tell who has problem in your family. Is it you? or '+dependentList+' someone else .', 'Please tell any name to continue');
+                hndlr.emit(':ask','Dear '+user +' , Please tell who has problem in your family. Is it you? or '+dependentList+' someone else .', 'Please tell any name to continue');
             });
         });
     },
     'fnMyNameIsIntent': function () {
         let name = this.event.request.intent.slots.name.value;
 
-        if(name=="myself" || name =="forme"){
+        if(name=="myself" || name =="for me" || name =="its me" || name =="its for me"){
             console.log("Setting Diagnosis details for Member");
             this.attributes['diagnosisItem'].email=this.attributes["email"];
             this.attributes['diagnosisItem'].dependentid = this.attributes["member"].id;

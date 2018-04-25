@@ -32,7 +32,9 @@
                             "name": "frequency",
                             "type": "AMAZON.US_FIRST_NAME",
                             "samples": [
-                                "I am getting {frequency}",
+                                "{frequency} a week",
+                                "{frequency} a day",
+                                "{frequency}",
                                 "{frequency} in a month",
                                 "{frequency} in a week",
                                 "monthly {frequency}",
@@ -41,7 +43,7 @@
                         },
                         {
                             "name": "visionblidspotoccurance",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "samples": [
                                 "{visionblidspotoccurance} I dint get any",
                                 "{visionblidspotoccurance} I did not get any such things",
@@ -95,6 +97,7 @@
                             "name": "days",
                             "type": "AMAZON.NUMBER",
                             "samples": [
+                                "{days} day",
                                 "{days}",
                                 "{days} days",
                                 "for the last {days} days",
@@ -105,7 +108,7 @@
                         },
                         {
                             "name": "bodypain",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "samples": [
                                 "{bodypain}",
                                 "{bodypain} yes I have",
@@ -114,17 +117,18 @@
                         },
                         {
                             "name": "travel",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "samples": [
-                                "{travel} I dint",
-                                "{travel} I havent ",
+                                "{travel}",
+                                "{travel} I didnt",
+                                "{travel} I havent",
                                 "{travel} I did not travel",
                                 "{travel} I travelled"
                             ]
                         },
                         {
                             "name": "surgery",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "samples": [
                                 "{surgery} I had surgery",
                                 "{surgery} Surgery in recent days",
@@ -158,7 +162,33 @@
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "BOOLEAN",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "no",
+                                "synonyms": [
+                                    "no",
+                                    "nope",
+                                    "false"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "yes",
+                                "synonyms": [
+                                    "yup",
+                                    "ya",
+                                    "true"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         "dialog": {
             "intents": [
@@ -195,7 +225,7 @@
                         },
                         {
                             "name": "bodypain",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
@@ -204,7 +234,7 @@
                         },
                         {
                             "name": "travel",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
@@ -213,7 +243,7 @@
                         },
                         {
                             "name": "surgery",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
@@ -247,7 +277,7 @@
                         },
                         {
                             "name": "visionblidspotoccurance",
-                            "type": "AMAZON.US_FIRST_NAME",
+                            "type": "BOOLEAN",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
