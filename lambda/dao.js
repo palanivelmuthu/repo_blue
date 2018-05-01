@@ -5,6 +5,8 @@ const docClient = new AWS.DynamoDB.DocumentClient({region:'us-east-1'});
 
 let getDependents = function (emailid,callback) {
 
+    console.log('emailid',emailid);
+
     var getparams = {
         TableName: "Member",
         Key: {
@@ -39,25 +41,6 @@ let saveDiagnosis = function(diagnosisItem,callback){
         }
     });
 
-}
-
-let getCaseInfo = function (args,callback) {
-
-    var getparams = {
-        TableName: "Diagnosis",
-        Key: {
-            email:args.emailid,
-            lastupdate:args.lastupdate
-        }
-    };
-    docClient.get(getparams, function (err, response) {
-
-        if (err) {
-            console.log("Members::get::error - " + JSON.stringify(err, null, 2));
-        } else {
-             callback(response.Item.dependents,response.Item.personalinfo);
-        }
-    });
 }
 
 module.exports.getDependents = getDependents;
