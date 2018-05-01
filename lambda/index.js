@@ -135,6 +135,7 @@ const handlers = {
        
        //var feverSymptoms = util.populateFeverSymptoms(days,bodypain,travel,surgery);
 
+       var username = this.attributes['diagnosisItem'].firstname;
        this.attributes['diagnosisItem'].problem="Fever";
        this.attributes['diagnosisItem'].symptoms=feversymptoms;
        //this.attributes['diagnosisItem'].lastupdate= new Date().toString();
@@ -142,7 +143,7 @@ const handlers = {
               
        console.log('fnFeverIntent diagnosisItem ',this.attributes['diagnosisItem'])
 
-       let providerNotes = 'Member Name :'+username+ 'MemberId XZ12345678 is having fever for the last '+days+
+       let providerNotes = 'Member Name :'+username+ ' MemberId XZ12345678 is having fever for the last '+days+
                             ' days. Question for bodypain '+bodypain+
                             ' . Question for your travel outside country is '+travel+
                             ' . Question for your surgery is ' + surgery;
@@ -155,11 +156,11 @@ const handlers = {
        dao.saveDiagnosis(this.attributes['diagnosisItem'],function(response){
 
         let speach = 'Thanks for all the details. My understanding is, You have fever for '+days+' days ';
-        speach = speach + 'and Question for your bodypain is '+bodypain ;
-        speach = speach + ' and Question for your travel outside country is '+travel;
-        speach = speach + ' and Question for your surgery is ' + surgery;
+        speach = speach + ' . Question for your bodypain is '+bodypain ;
+        speach = speach + ' . Question for your travel outside country is '+travel;
+        speach = speach + ' . Question for your surgery is ' + surgery;
         speach = speach + '. '+ response;
-        speach = speach +'. So '+ username+', for all your stated conditions, please take Tylenol or Ibuprofen for 5 days. That will reduce your fever.';
+        speach = speach +'. So '+ username+' , for all your stated conditions, please take Tylenol or Ibuprofen for 5 days. That will reduce your fever.';
         speach = speach +' If you are still looking for assistance, then shall I send your symptoms, to your registered provider, so that they will call you back, please say yes, to send the details or stop, to end this session ?';
 
 
@@ -217,7 +218,7 @@ const handlers = {
 
         var caseInfoURL = encodeUrl('https://hzpptkl4bh.execute-api.us-east-1.amazonaws.com/INT/case?email='+email+'&lastupdate='+lastupdate);
 
-        console.log('caseInfoURL',caseInfoURL);
+        console.log('Encoded - caseInfoURL',caseInfoURL);
 
         nexmo.calls.create({
             to: [{
@@ -228,14 +229,10 @@ const handlers = {
             from: {
             type: 'phone',
             number: process.env.NEXMO_VIRT_NUM
-            //number: 12017785675 // your virtual number
             },
-            //answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
             //answer_url: ['https://344yvcjkv4.execute-api.us-east-1.amazonaws.com/INT/fnBlueCaseInfo']
             answer_url: [caseInfoURL]
             }, (err, res) =>{
-                console.error('inside callback method err',err);
-                console.log('inside callback method res',res);
                 if(err) { 
                     console.error(err); 
                 }else { 
