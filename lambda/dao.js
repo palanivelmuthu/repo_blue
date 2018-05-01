@@ -23,17 +23,13 @@ let getDependents = function (emailid,callback) {
 
 let saveDiagnosis = function(diagnosisItem,callback){
 
-    console.log("Inside DAO : ",diagnosisItem );
+    console.log("Inside DAO : ",JSON.stringify(diagnosisItem));
     
-    diagnosisItem.lastupdate= new Date().toString()
     var params = {
         Item:diagnosisItem,
         TableName:'Diagnosis'
     };
     docClient.put(params, function (err, data) {
-
-        console.log("Inside PUT Err  : ", err );
-        console.log("Inside PUT data : ", data );
 
         if (err) {
             console.log("Diagnosis::Save::Error - " + JSON.stringify(err, null, 2));
@@ -43,6 +39,25 @@ let saveDiagnosis = function(diagnosisItem,callback){
         }
     });
 
+}
+
+let getCaseInfo = function (args,callback) {
+
+    var getparams = {
+        TableName: "Diagnosis",
+        Key: {
+            email:args.emailid,
+            lastupdate:args.lastupdate
+        }
+    };
+    docClient.get(getparams, function (err, response) {
+
+        if (err) {
+            console.log("Members::get::error - " + JSON.stringify(err, null, 2));
+        } else {
+             callback(response.Item.dependents,response.Item.personalinfo);
+        }
+    });
 }
 
 module.exports.getDependents = getDependents;

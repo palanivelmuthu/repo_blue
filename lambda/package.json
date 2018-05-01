@@ -6,6 +6,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "alexa-sdk": "^1.0.0"
+    "alexa-sdk": "^1.0.0",
+    "date-time": "^2.1.0",
+    "encodeurl": "^1.0.2",
+    "nexmo": "^2.2.0",
+    "request": "^2.85.0"
   }
 }
