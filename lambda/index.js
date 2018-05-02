@@ -15,6 +15,9 @@ const STOP_MESSAGE = 'Have a nice day. Goodbye!';
 const YES_MESSAGE = 'Please tell me, if you have any problems';
 const NO_MESSAGE = 'Thank you..Have a nice day. Goodbye!';
 
+const SSML_ST_TAG_SAY_AS = '<say-as interpret-as="characters">';
+const SSML_END_TAG_SAY_AS = '</say-as>';
+
 exports.handler = function (event, context,callback) {
     var alexa = Alexa.handler(event, context);
     //.APP_ID = APP_ID;
@@ -118,7 +121,7 @@ const handlers = {
                 }
             }
         }
-        this.emit(':ask','Hello '+name+', Please tell me your problem, I can try my best to help you. Say something like, I have fever, I have head ache.')
+        this.emit(':ask','Hello '+name+', Please tell me your health problem, I can try my best to help you. Say something like, I have fever, I have head ache.')
     },
 
     'fnFeverIntent':function(){
@@ -142,7 +145,7 @@ const handlers = {
               
        console.log('fnFeverIntent diagnosisItem ',this.attributes['diagnosisItem'])
 
-       let providerNotes = 'Member Name : '+username+ ', MemberId '+this.attributes['diagnosisItem'].memberId+' is having fever for the last '+days+
+       let providerNotes = 'Member Name : '+username+ ' , Member ID '+SSML_ST_TAG_SAY_AS+this.attributes['diagnosisItem'].memberId+SSML_END_TAG_SAY_AS+' is having fever for the last '+days+
                             ' days. Question for bodypain '+bodypain+
                             ' . Question for your travel outside country is '+travel+
                             ' . Question for your surgery is ' + surgery;
@@ -189,8 +192,10 @@ const handlers = {
         this.attributes['diagnosisItem'].symptoms=headAcheSymptoms;
         this.attributes['diagnosisItem'].lastupdate= dateTime().toString();
         
-        let providerNotes = 'Member Name : '+username+ ', MemberId '+this.attributes['diagnosisItem'].memberId+' is having headache for the last '+headacheduration+
-        ' days on the '+headlocation+' side of your head';
+
+        
+        let providerNotes = 'Member Name '+username+ ' , Member ID '+SSML_ST_TAG_SAY_AS+this.attributes['diagnosisItem'].memberId+SSML_END_TAG_SAY_AS+' is having headache for the last '+headacheduration+
+        ' days on the '+headlocation+' side of the head';
 
         this.attributes['diagnosisItem'].notesToProvider=providerNotes;
         this.attributes['diagnosisItem'].SentToProvider=true;
