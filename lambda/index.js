@@ -90,7 +90,7 @@ const handlers = {
                 hndlr.attributes["dependentList"] = dependents;
                 hndlr.attributes["diagnosisItem"]={};
 
-                hndlr.emit(':ask','Dear '+user +' , Please tell who has problem in your family. Is it you? or '+dependentList+' someone else .', 'Please tell any name to continue');
+                hndlr.emit(':ask','Dear '+user +' , Please tell who has health issues in your family. Is it you? or '+dependentList+' someone else. If this is a life threatening emergency, please say stop and call nine one one', 'Please tell any name to continue');
             });
         });
     },
@@ -103,6 +103,7 @@ const handlers = {
             this.attributes['diagnosisItem'].dependentid = this.attributes["member"].id;
             this.attributes['diagnosisItem'].firstname = this.attributes["member"].firstname;
             this.attributes['diagnosisItem'].lastname = this.attributes["member"].lastname;
+            this.attributes['diagnosisItem'].memberId = this.attributes["member"].memberId;
             name=this.attributes["member"].firstname;
         }else{
             for(var i=0;i < this.attributes["dependentList"].length;i++){
@@ -113,6 +114,7 @@ const handlers = {
                     this.attributes['diagnosisItem'].dependentid = this.attributes["dependentList"][i].id;
                     this.attributes['diagnosisItem'].firstname = this.attributes["dependentList"][i].firstname;
                     this.attributes['diagnosisItem'].lastname = this.attributes["dependentList"][i].lastname;
+                    this.attributes['diagnosisItem'].memberId = this.attributes["dependentList"][i].memberId;
                 }
             }
         }
@@ -133,17 +135,14 @@ const handlers = {
         "surgery":surgery
         };
        
-       //var feverSymptoms = util.populateFeverSymptoms(days,bodypain,travel,surgery);
-
        var username = this.attributes['diagnosisItem'].firstname;
        this.attributes['diagnosisItem'].problem="Fever";
        this.attributes['diagnosisItem'].symptoms=feversymptoms;
-       //this.attributes['diagnosisItem'].lastupdate= new Date().toString();
        this.attributes['diagnosisItem'].lastupdate= dateTime().toString();
               
        console.log('fnFeverIntent diagnosisItem ',this.attributes['diagnosisItem'])
 
-       let providerNotes = 'Member Name :'+username+ ' MemberId XZ12345678 is having fever for the last '+days+
+       let providerNotes = 'Member Name : '+username+ ', MemberId '+this.attributes['diagnosisItem'].memberId+' is having fever for the last '+days+
                             ' days. Question for bodypain '+bodypain+
                             ' . Question for your travel outside country is '+travel+
                             ' . Question for your surgery is ' + surgery;
@@ -161,7 +160,7 @@ const handlers = {
         speach = speach + ' . Question for your surgery is ' + surgery;
         speach = speach + '. '+ response;
         speach = speach +'. So '+ username+' , for all your stated conditions, please take Tylenol or Ibuprofen for 5 days. That will reduce your fever.';
-        speach = speach +' If you are still looking for assistance, then shall I send your symptoms, to your registered provider, so that they will call you back, please say yes, to send the details or stop, to end this session ?';
+        speach = speach +' If you are still looking for assistance, then shall I send your symptoms, to your registered provider, so that they will call you back, please say yes, to send the details, or say stop to end this session ?';
 
 
         hndlr.emit(':ask',speach);
@@ -184,14 +183,25 @@ const handlers = {
             "headlocation":headlocation
         };
     
-        this.attributes['diagnosisItem'].problem="Head Ache";
+        var username = this.attributes['diagnosisItem'].firstname;
+
+        this.attributes['diagnosisItem'].problem="Headache";
         this.attributes['diagnosisItem'].symptoms=headAcheSymptoms;
         this.attributes['diagnosisItem'].lastupdate= dateTime().toString();
-        //this.attributes['diagnosisItem'].lastupdate= new Date().toString();
+        
+        let providerNotes = 'Member Name : '+username+ ', MemberId '+this.attributes['diagnosisItem'].memberId+' is having headache for the last '+headacheduration+
+        ' days on the '+headlocation+' side of your head';
+
+        this.attributes['diagnosisItem'].notesToProvider=providerNotes;
+        this.attributes['diagnosisItem'].SentToProvider=true;
+
 
         let hndlr = this;
         dao.saveDiagnosis(this.attributes['diagnosisItem'],function(response){
-           let speech = 'Dear '+username+', if you have headache for '+headacheduration+' days  in '+headlocation+' side of your head , gently massage with thumb finger on your '+headlocation+' side of head for 15 min. This will reduce your pain quickly. Nothing to worry about it. Thank you. if you have any other problems to check, then please tell you problem, otherwise say stop';
+           let speech = 'Dear '+username+', if you have headache for '+headacheduration+' days  on the '+
+           headlocation+' side of your head , gently massage with thumb on your '+headlocation+
+           ' side of head for 15 min and also please take Ibuprofen. If you are still looking for assistance, then shall I send your symptoms, to your registered provider, so that they will call you back, please say yes, to send the details, or say stop to end this session ?';
+
             hndlr.emit(':ask',speech);
        })
     },
@@ -204,6 +214,8 @@ const handlers = {
             applicationId: process.env.NEXMO_APP_ID,
             privateKey: privateKeyFile
         });
+
+        
         
         var isSendToProvider = this.event.request.intent.slots.isSendToProvider.value;
         console.log('isSendToProvider',isSendToProvider);
@@ -216,10 +228,11 @@ const handlers = {
         console.log('In fnSendToProvider, email', email);
         console.log('In fnSendToProvider, lastupdate', lastupdate);
 
-        var caseInfoURL = encodeUrl('https://hzpptkl4bh.execute-api.us-east-1.amazonaws.com/INT/case?email='+email+'&lastupdate='+lastupdate);
+        var caseInfoURL = encodeUrl(process.env.URL_CASE_INFO+'?email='+email+'&lastupdate='+lastupdate);
 
         console.log('Encoded - caseInfoURL',caseInfoURL);
 
+        
         nexmo.calls.create({
             to: [{
             type: 'phone',
@@ -241,7 +254,7 @@ const handlers = {
                 hndlr.emit(':ask', 'Your details has been sent to your provider');
             });
         
-        //hndlr.emit(':ask', 'This step skipped intentionally. Your details has been sent to your provider');
+        //hndlr.emit(':ask', 'This step has been skipped intentionally. Your details has NOT been sent to your provider');
     },
 
     'AMAZON.HelpIntent': function () {
